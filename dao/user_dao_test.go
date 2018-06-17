@@ -42,6 +42,10 @@ func TestUserDao_Save(t *testing.T) {
 	if user, err := dao.FindOne(user.Id); err != nil || user == nil {
 		t.Error("User not found")
 	}
+	utils.AssertEqual(user.Name, "Name 3", t)
+	utils.AssertEqual(user.Surname, "Surname 3", t)
+	utils.AssertEqual(user.Email, "email3@mail.ru", t)
+	utils.AssertEqual(user.Password, "password3", t)
 }
 
 func TestUserDao_Update(t *testing.T) {
@@ -57,6 +61,11 @@ func TestUserDao_Update(t *testing.T) {
 	utils.AssertNotErr(err, t)
 	user2, err := dao.FindOne(1)
 	utils.AssertNotNil(user2, t)
+
+	utils.AssertEqual(user.Name, "Name New", t)
+	utils.AssertEqual(user.Surname, "Surname New", t)
+	utils.AssertEqual(user.Email, "email_new@mail.ru", t)
+	utils.AssertEqual(user.Password, "password_new", t)
 }
 
 func TestUserDao_Delete(t *testing.T) {
