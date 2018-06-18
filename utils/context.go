@@ -60,7 +60,7 @@ func (ctx *appContext) Get(t reflect.Type) (interface{}, error) {
 	if component, ok := ctx.components[t]; ok {
 		componentType := reflect.TypeOf(component)
 		if componentType.Kind() == reflect.Func {
-			return component.(InstanceFactory)()
+			return component.(func () (interface{}, error))()
 		} else {
 			return component, nil
 		}

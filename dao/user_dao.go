@@ -102,13 +102,13 @@ func (dao *userDao) FindOne(id int) (*domain.User, error) {
 		log.Fatal(err)
 		return nil, err
 	}
-	stmt, err := db.Prepare("SELECT name, surname, email, password FROM users WHERE id = $1")
+	stmt, err := db.Prepare("SELECT id, name, surname, email, password FROM users WHERE id = $1")
 	if err != nil {
 		log.Fatal(err)
 		return nil, err
 	}
 	user := &domain.User{}
-	err = stmt.QueryRow(id).Scan(&user.Name, &user.Surname, &user.Email, &user.Password)
+	err = stmt.QueryRow(id).Scan(&user.Id, &user.Name, &user.Surname, &user.Email, &user.Password)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err

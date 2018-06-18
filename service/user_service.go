@@ -10,9 +10,13 @@ import (
 var service UserService
 
 func NewUserService(ctx utils.AppContext) UserService {
-	if service == nil{
+	if service == nil {
+		userDao, err := ctx.Get(reflect.TypeOf((*dao.UserDao)(nil)).Elem())
+		if err != nil {
+			panic(err)
+		}
 		service = &userService{
-			Dao: ctx.Get(reflect.TypeOf((dao.UserDao)(nil)).Elem()).(dao.UserDao),
+			Dao: userDao.(dao.UserDao),
 		}
 	}
 	return service
@@ -30,22 +34,22 @@ type userService struct {
 	Dao dao.UserDao
 }
 
-func (*userService) Save(user domain.User) (domain.User, error) {
-	panic("implement me")
+func (service *userService) Save(user domain.User) (domain.User, error) {
+	return service.Dao.Save(user)
 }
 
-func (*userService) Update(user domain.User) (domain.User, error) {
-	panic("implement me")
+func (service *userService) Update(user domain.User) (domain.User, error) {
+	return service.Dao.Update(user)
 }
 
-func (*userService) Delete(id int) error {
-	panic("implement me")
+func (service *userService) Delete(id int) error {
+	return service.Dao.Delete(id)
 }
 
-func (*userService) FindOne(id int) (*domain.User, error) {
-	panic("implement me")
+func (service *userService) FindOne(id int) (*domain.User, error) {
+	return service.Dao.FindOne(id)
 }
 
-func (*userService) FindAll() (domain.Users, error) {
-	panic("implement me")
+func (service *userService) FindAll() (domain.Users, error) {
+	return service.Dao.FindAll()
 }
