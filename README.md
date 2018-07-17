@@ -1,4 +1,7 @@
 # Welcome to NeurDICOM documentation
+
+[![Build Status](https://travis-ci.org/reactmed/goneurdicom.svg?branch=master)](https://travis-ci.org/reactmed/goneurdicom)
+
 NeurDICOM is portable and easy-to-deploy RESTful DICOM and PACS server that allows physicians to use state-of-the-art methods of machine learning and neural networks to make a diagnosis based on medical images processing and interpetating.
 
 ## Content
